@@ -15,7 +15,7 @@ use Str;
 class CreatePermissionRolController extends Controller
 {
     public function store(Request $request){
-        DB::beginTransaction();  // start transaction for database operations
+        DB::beginTransaction();  
         try {
             // Validate request data
             $message = [
@@ -48,7 +48,7 @@ class CreatePermissionRolController extends Controller
             DB::commit(); //
           return ApiResponse::success('Rol creado',200,$role);
         } catch (\Exception $e) {
-            //throw $th;
+            
             return ApiResponse::error('Error al crear el rol '.$e->getMessage(), 500);
         }
     }
@@ -58,7 +58,7 @@ class CreatePermissionRolController extends Controller
             $roles = Role::get();
             return ApiResponse::success('Roles obtenidos',200,$roles);
         } catch (\Exception $e) {
-            //throw $th;
+            
             return ApiResponse::error('Error al obtener los roles '.$e->getMessage(), 500);
         }
     }
@@ -67,7 +67,6 @@ class CreatePermissionRolController extends Controller
         
         DB::beginTransaction();
         try {
-            // Validate request data
 
             $message = [
                 'permissions.required' => 'Los permisos son obligatorios.',
@@ -83,7 +82,6 @@ class CreatePermissionRolController extends Controller
             if($validator->fails()){
                 return ApiResponse::error('Error de validación '.$validator->messages()->first(),422);
             }
-           // return $request->all();
             // crea permisos
             foreach($request->permissions as $permission){
                 Permission::create(['name' => $permission]);
@@ -92,7 +90,7 @@ class CreatePermissionRolController extends Controller
             DB::commit();
             return ApiResponse::success('Permisos creado',200,$request);
         } catch (\Exception $e) {
-            //throw $th;
+            
             return ApiResponse::error('Error al crear los permisos'. $e->getMessage(),403);
         }
     }
@@ -100,7 +98,7 @@ class CreatePermissionRolController extends Controller
     public function createUser(Request $request){
         DB::beginTransaction();
         try {
-            // Validate request data
+            
             $message = [
                 // 'name.required' => 'El nombre es obligatorio.',
                 // 'name.string' => 'El nombre debe ser una cadena.',

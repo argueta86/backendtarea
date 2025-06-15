@@ -18,13 +18,12 @@ class TareaSeeder extends Seeder
             return;
         }
 
-        // Creamos 10 tareas de prueba
         for ($i = 1; $i <= 10; $i++) {
             Tarea::create([
                 'user_id'     => $user->id,
                 'titulo'      => "Tarea de prueba #$i",
                 'descripcion' => "Descripción para la tarea de prueba número $i.",
-                'completada'  => $i % 2 === 0, // alterna entre completada y no completada
+                'completada'  => $i % 2 === 0, 
             ]);
         }
 

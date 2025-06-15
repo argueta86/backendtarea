@@ -31,7 +31,7 @@ class TareaController extends Controller
             'titulo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'completada' => 'boolean',
-            'progreso' => 'nullable|integer|min:0|max:100' // ✅ validación añadida
+            'progreso' => 'nullable|integer|min:0|max:100' 
         ]);
 
         $tarea = Auth::user()->tareas()->create($validated);
@@ -63,10 +63,10 @@ class TareaController extends Controller
             'titulo' => 'sometimes|required|string|max:255',
             'descripcion' => 'nullable|string',
             'completada' => 'boolean',
-            'progreso' => 'nullable|integer|min:0|max:100' // ✅ validación añadida
+            'progreso' => 'nullable|integer|min:0|max:100' 
         ]);
 
-        $tarea->update($validated); // No necesitas el código manual si usas $fillable correctamente
+        $tarea->update($validated); 
 
  
         return response()->json($tarea);

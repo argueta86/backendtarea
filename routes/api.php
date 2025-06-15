@@ -18,13 +18,13 @@ Route::middleware('auth:api')->prefix('users')->group(function () {
     Route::post('/role', [CreatePermissionRolController::class, 'store'])->middleware('rol:Super Admin');
     Route::post('logout', [AuthController::class, 'logout']);
 });
-
+// rutas del dashboard
 Route::middleware('auth:api')->group(function () {
     Route::get('/admin-dashboard', function () {
         return response()->json(['message' => 'Welcome to the admin dashboard']);
     })->middleware('rol:Admin,Super Admin');
 
-   
+   // rutas de tareas
     Route::apiResource('tareas', TareaController::class);
     Route::post('/tareas', [TareaController::class, 'store']);
     Route::get('/tareas', [TareaController::class, 'index']);

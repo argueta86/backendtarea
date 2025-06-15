@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    // ✅ LOGIN
+    //  LOGIN
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -34,7 +34,7 @@ class AuthController extends Controller
             'role' => $user->getRoleNames(),
         ];
 
-        // Generar nuevo token con claims
+        // Generar nuevo token 
         $token = JWTAuth::claims($customClaims)->fromUser($user);
 
         return response()->json([
@@ -43,7 +43,7 @@ class AuthController extends Controller
         ], 200);
     }
 
-    // ✅ REGISTER
+    // para registrar
     public function register(Request $request)
     {
         try {
@@ -93,7 +93,7 @@ class AuthController extends Controller
         }
     }
 
-    // ✅ REFRESH TOKEN
+    //  Refrescar TOKEN
     public function refresh(Request $request)
     {
         try {
@@ -130,7 +130,7 @@ class AuthController extends Controller
         }
     }
 
-    // ✅ LOGOUT
+    //  LOGOUT
     public function logout()
     {
         try {
@@ -144,7 +144,7 @@ class AuthController extends Controller
             }
 
             $user = JWTAuth::authenticate($token);
-            $user->update(['is_logged_in' => false]); // Opcional
+            $user->update(['is_logged_in' => false]); 
 
             return response()->json([
                 'message' => 'Sesión cerrada correctamente',
